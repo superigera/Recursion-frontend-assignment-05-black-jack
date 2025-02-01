@@ -1,13 +1,8 @@
 import { describe, test, expect } from "vitest";
-import { Card, Suit, Rank } from "../Card";
+import { Card } from "../../Card";
+import { SUITS, BLACKJACK_NUMERIC_RANKS } from "../../constants";
 
-describe("Card クラスのテスト", () => {
-  test("スートとランクが正しく設定される", () => {
-    const card = new Card("S", "A");
-    expect(card.suit).toBe("S");
-    expect(card.rank).toBe("A");
-  });
-
+describe("Cardクラスのテスト", () => {
   test("Aの数値は11", () => {
     const card = new Card("S", "A");
     expect(card.getRankNumber()).toBe("11");
@@ -20,10 +15,8 @@ describe("Card クラスのテスト", () => {
   });
 
   test("A, J, Q, K 以外の数値はその数値を返す", () => {
-    const suits: Suit[] = ["H", "D", "C", "S"];
-    const numberRanks: Rank[] = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
-    for (const rank of numberRanks) {
-      for (const suit of suits) {
+    for (const rank of BLACKJACK_NUMERIC_RANKS) {
+      for (const suit of SUITS) {
         const card = new Card(suit, rank);
         expect(card.getRankNumber()).toBe(rank);
       }
